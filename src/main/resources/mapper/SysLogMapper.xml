@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunshine.gardens.model.po.SysLog" >
+  <insert id="insert" parameterType="com.sunshine.gardens.model.po.SysLog" >
+    insert into t_sys_log (LOG_ID, USERNAME, LOG_URL, 
+      CONTENT, NOTE, LOG_STATE, 
+      ACCESS_TIME)
+    values (#{logId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{logUrl,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{logState,jdbcType=INTEGER}, 
+      #{accessTime,jdbcType=TIMESTAMP})
+  </insert>
+</mapper>

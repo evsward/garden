@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunshine.gardens.model.po.CmsColumn">
+	<resultMap id="BaseResultMap" type="com.sunshine.gardens.model.po.CmsColumn">
+		<id column="COLUMN_ID" jdbcType="BIGINT" property="columnId" />
+		<result column="COLUMN_NAME" jdbcType="VARCHAR" property="columnName" />
+		<result column="COLUMN_LEVLE" jdbcType="INTEGER" property="columnLevle" />
+		<result column="PARENT_ID" jdbcType="BIGINT" property="parentId" />
+		<result column="COLUMN_TYPE" jdbcType="INTEGER" property="columnType" />
+		<result column="IF_HIDDEN" jdbcType="INTEGER" property="ifHidden" />
+		<result column="WEIGHT" jdbcType="INTEGER" property="weight" />
+		<result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
+		<result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+		<result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+		<result column="ICON_URL" jdbcType="VARCHAR" property="iconUrl" />
+	</resultMap>
+	<select id="find" resultMap="BaseResultMap"
+		parameterType="com.sunshine.gardens.model.po.CmsColumn">
+		select a.* from t_cms_column a
+		<where>
+			<if test="columnId != null and columnId != 0">
+				and COLUMN_ID = #{columnId,jdbcType=INTEGER}
+			</if>
+			<if test="columnName != null">
+				and COLUMN_NAME = #{columnName , jdbcType=VARCHAR}
+			</if>
+			<if test="columnLevle != null and columnLevle != 0">
+				and COLUMN_LEVLE = #{columnLevle , jdbcType=INTEGER}
+			</if>
+			<if test="parentId != null and parentId != 0">
+				and PARENT_ID = #{parentId , jdbcType=BIGINT}
+			</if>
+			<if test="columnType != null and columnType != 0">
+				and COLUMN_TYPE = #{columnType , jdbcType=INTEGER}
+			</if>
+			<if test="ifHidden != null and ifHidden != 0">
+				and IF_HIDDEN = #{ifHidden , jdbcType=INTEGER}
+			</if>
+			<if test="weight != null and weight != 0">
+				and WEIGHT = #{weight , jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+</mapper>

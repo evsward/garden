@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunshine.gardens.model.po.UserInfo">
+	<resultMap id="BaseResultMap" type="com.sunshine.gardens.model.po.UserInfo">
+		<id column="OPENID" jdbcType="VARCHAR" property="openid" />
+		<result column="SUBSCRIBE" jdbcType="INTEGER" property="subscribe" />
+		<result column="NICKNAME" jdbcType="VARCHAR" property="nickname" />
+		<result column="SEX" jdbcType="INTEGER" property="sex" />
+		<result column="CITY" jdbcType="VARCHAR" property="city" />
+		<result column="COUNTRY" jdbcType="VARCHAR" property="country" />
+		<result column="PROVINCE" jdbcType="VARCHAR" property="province" />
+		<result column="USER_LANGUAGE" jdbcType="VARCHAR" property="userLanguage" />
+		<result column="HEADIMGURL" jdbcType="VARCHAR" property="headimgurl" />
+		<result column="SUBSCRIBE_TIME" jdbcType="BIGINT" property="subscribeTime" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="GROUPID" jdbcType="INTEGER" property="groupid" />
+		<result column="UNIONID" jdbcType="VARCHAR" property="unionid" />
+		<result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
+		<result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+	<select id="find" resultMap="BaseResultMap"
+		parameterType="com.sunshine.gardens.model.po.UserInfo">
+		select * from t_user_info
+		<where>
+			<if test="openid != null">
+				and OPENID = #{openid , jdbcType=VARCHAR}
+			</if>
+			<if test="subscribe != null">
+				and SUBSCRIBE = #{subscribe,jdbcType=INTEGER}
+			</if>
+			<if test="nickname != null">
+				and NICKNAME = #{nickname , jdbcType=VARCHAR}
+			</if>
+			<if test="sex != null">
+				and SEX = #{sex , jdbcType=INTEGER}
+			</if>
+			<if test="city != null">
+				and CITY = #{city , jdbcType=VARCHAR}
+			</if>
+			<if test="country != null">
+				and COUNTRY = #{country , jdbcType=VARCHAR}
+			</if>
+			<if test="province != null">
+				and PROVINCE = #{province , jdbcType=VARCHAR}
+			</if>
+			<if test="userLanguage != null">
+				and USERLANGUAGE = #{userLanguage , jdbcType=VARCHAR}
+			</if>
+			<if test="headimgurl != null">
+				and HEADIMGURL = #{headimgurl , jdbcType=VARCHAR}
+			</if>
+			<if test="subscribeTime != null and subscribeTime != 0">
+				and SUBSCRIBE_TIME = #{subscribeTime,jdbcType=BIGINT}
+			</if>
+			<if test="remark != null">
+				and REMARK = #{remark , jdbcType=VARCHAR}
+			</if>
+			<if test="groupid != null">
+				and GROUPID = #{groupid , jdbcType=INTEGER}
+			</if>
+			<if test="unionid != null">
+				and UNIONID = #{unionid , jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by CREATE_TIME
+	</select>
+	<select id="findByPage" resultMap="BaseResultMap"
+		parameterType="com.sunshine.gardens.model.po.UserInfo">
+		select * from t_user_info
+		<where>
+			<if test="openid != null">
+				and OPENID = #{openid , jdbcType=VARCHAR}
+			</if>
+			<if test="subscribe != null">
+				and SUBSCRIBE = #{subscribe,jdbcType=INTEGER}
+			</if>
+			<if test="nickname != null">
+				and NICKNAME = #{nickname , jdbcType=VARCHAR}
+			</if>
+			<if test="sex != null">
+				and SEX = #{sex , jdbcType=INTEGER}
+			</if>
+			<if test="city != null">
+				and CITY = #{city , jdbcType=VARCHAR}
+			</if>
+			<if test="country != null">
+				and COUNTRY = #{country , jdbcType=VARCHAR}
+			</if>
+			<if test="province != null">
+				and PROVINCE = #{province , jdbcType=VARCHAR}
+			</if>
+			<if test="userLanguage != null">
+				and USERLANGUAGE = #{userLanguage , jdbcType=VARCHAR}
+			</if>
+			<if test="headimgurl != null">
+				and HEADIMGURL = #{headimgurl , jdbcType=VARCHAR}
+			</if>
+			<if test="subscribeTime != null and subscribeTime != 0">
+				and SUBSCRIBE_TIME = #{subscribeTime,jdbcType=BIGINT}
+			</if>
+			<if test="remark != null">
+				and REMARK = #{remark , jdbcType=VARCHAR}
+			</if>
+			<if test="groupid != null">
+				and GROUPID = #{groupid , jdbcType=INTEGER}
+			</if>
+			<if test="unionid != null">
+				and UNIONID = #{unionid , jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by CREATE_TIME
+	</select>
+	<select id="findByPageCount" resultType="java.lang.Long"
+		parameterType="com.sunshine.gardens.model.po.UserInfo">
+		select count(*) from t_user_info
+		<where>
+			<if test="openid != null">
+				and OPENID = #{openid , jdbcType=VARCHAR}
+			</if>
+			<if test="subscribe != null">
+				and SUBSCRIBE = #{subscribe,jdbcType=INTEGER}
+			</if>
+			<if test="nickname != null">
+				and NICKNAME = #{nickname , jdbcType=VARCHAR}
+			</if>
+			<if test="sex != null">
+				and SEX = #{sex , jdbcType=INTEGER}
+			</if>
+			<if test="city != null">
+				and CITY = #{city , jdbcType=VARCHAR}
+			</if>
+			<if test="country != null">
+				and COUNTRY = #{country , jdbcType=VARCHAR}
+			</if>
+			<if test="province != null">
+				and PROVINCE = #{province , jdbcType=VARCHAR}
+			</if>
+			<if test="userLanguage != null">
+				and USERLANGUAGE = #{userLanguage , jdbcType=VARCHAR}
+			</if>
+			<if test="headimgurl != null">
+				and HEADIMGURL = #{headimgurl , jdbcType=VARCHAR}
+			</if>
+			<if test="subscribeTime != null and subscribeTime != 0">
+				and SUBSCRIBE_TIME = #{subscribeTime,jdbcType=BIGINT}
+			</if>
+			<if test="remark != null">
+				and REMARK = #{remark , jdbcType=VARCHAR}
+			</if>
+			<if test="groupid != null">
+				and GROUPID = #{groupid , jdbcType=INTEGER}
+			</if>
+			<if test="unionid != null">
+				and UNIONID = #{unionid , jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by CREATE_TIME
+	</select>
+	<update id="update" parameterType="com.sunshine.gardens.model.po.UserInfo">
+		update t_user_info
+		<set>
+			<if test="subscribe != null">
+				SUBSCRIBE = #{subscribe,jdbcType=INTEGER},
+			</if>
+			<if test="nickname != null">
+				NICKNAME = #{nickname , jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				SEX = #{sex , jdbcType=INTEGER},
+			</if>
+			<if test="city != null">
+				CITY = #{city , jdbcType=VARCHAR},
+			</if>
+			<if test="country != null">
+				COUNTRY = #{country , jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				PROVINCE = #{province , jdbcType=VARCHAR},
+			</if>
+			<if test="userLanguage != null">
+				USERLANGUAGE = #{userLanguage , jdbcType=VARCHAR},
+			</if>
+			<if test="headimgurl != null">
+				HEADIMGURL = #{headimgurl , jdbcType=VARCHAR},
+			</if>
+			<if test="subscribeTime != null and subscribeTime != 0">
+				SUBSCRIBE_TIME = #{subscribeTime,jdbcType=BIGINT},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark , jdbcType=VARCHAR},
+			</if>
+			<if test="groupid != null">
+				GROUPID = #{groupid , jdbcType=INTEGER},
+			</if>
+			<if test="unionid != null">
+				UNIONID = #{unionid , jdbcType=VARCHAR},
+			</if>
+		</set>
+		where OPENID = #{openid,jdbcType=VARCHAR}
+	</update>
+	<insert id="insert" parameterType="com.sunshine.gardens.model.po.UserInfo">
+		insert into t_user_info (
+		OPENID, SUBSCRIBE, NICKNAME, SEX, CITY, COUNTRY,PROVINCE,
+		HEADIMGURL,REMARK, GROUPID, CREATE_TIME)
+		values (
+		#{openid,jdbcType=VARCHAR},
+		#{subscribe,jdbcType=INTEGER},
+		#{nickname,jdbcType=VARCHAR},
+		#{sex,jdbcType=INTEGER},
+		#{city,jdbcType=VARCHAR},
+		#{country,jdbcType=VARCHAR},
+		#{province,jdbcType=VARCHAR},
+		#{headimgurl,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{groupid,jdbcType=INTEGER},
+		#{createTime,jdbcType=DATE})
+	</insert>
+</mapper>

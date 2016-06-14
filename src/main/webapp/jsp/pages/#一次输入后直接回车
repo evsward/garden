@@ -1,0 +1,13 @@
+#一次输入后直接回车
+cd ~/Document/garden
+
+svn commit -m "i changed the text or images of pages"
+
+-----------------------------------------------------
+gardenrc
+#登陆远程服务器
+gogarden
+//密码
+Jingyu0098
+#远程操作
+gardenbuild

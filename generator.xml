@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry
+		location="C:/Users/LiuWenbin/.m2/repository/mysql/mysql-connector-java/5.1.10/mysql-connector-java-5.1.10.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:Mysql://localhost:3306/garden?characterEncoding=utf8"
+			userId="root" password="root">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<javaModelGenerator targetPackage="com.sunshine.gardens.model.po"
+			targetProject="E:/java/LiuwbGITRepo/garden/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="com.sunshine.gardens.model.sqlmap"
+			targetProject="E:/java/LiuwbGITRepo/garden/src/main/resources">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.sunshine.gardens.dao"
+			targetProject="E:/java/LiuwbGITRepo/garden/src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<table tableName="t_activity" domainObjectName="Activity" />
+		<table tableName="t_activity_user" domainObjectName="ActivityUser" />
+		<table tableName="t_cms_article" domainObjectName="CmsArticle" />
+		<table tableName="t_cms_column" domainObjectName="CmsColumn" />
+		<table tableName="t_menu" domainObjectName="Menu" />
+		<table tableName="t_product" domainObjectName="Product" />
+		<table tableName="t_real_order" domainObjectName="RealOrder" />
+		<table tableName="t_reserve_order" domainObjectName="ReserveOrder" />
+		<table tableName="t_sys_config" domainObjectName="SysConfig" />
+		<table tableName="t_sys_log" domainObjectName="SysLog" />
+		<table tableName="t_sys_role" domainObjectName="SysRole" enableCountByExample="false"/>
+		<table tableName="t_sys_user" domainObjectName="SysUser" />
+		<table tableName="t_sys_user_role" domainObjectName="SysUserRole" />
+		<table tableName="t_user_info" domainObjectName="UserInfo" />
+		<table tableName="t_user_position" domainObjectName="UserPosition" />
+		<table tableName="t_vip_info" domainObjectName="VipInfo" />
+	</context>
+</generatorConfiguration>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunshine.gardens.model.po.ReserveOrder">
+	<resultMap id="BaseResultMap" type="com.sunshine.gardens.model.po.ReserveOrder">
+		<id column="RESERVE_ID" jdbcType="VARCHAR" property="reserveId" />
+		<result column="PRODUCT_ID" jdbcType="INTEGER" property="productId" />
+		<result column="OPENID" jdbcType="VARCHAR" property="openid" />
+		<result column="SUBMITTER_NAME" jdbcType="VARCHAR" property="submitterName" />
+		<result column="SUBMITTER_MOBILE" jdbcType="VARCHAR" property="submitterMobile" />
+		<result column="PAY_METHOD" jdbcType="INTEGER" property="payMethod" />
+		<result column="VIP_ID" jdbcType="VARCHAR" property="vipId" />
+		<result column="SPECIAL_NOTES" jdbcType="VARCHAR" property="specialNotes" />
+		<result column="AMOUNTS" jdbcType="INTEGER" property="amounts" />
+		<result column="NIGHTS" jdbcType="INTEGER" property="nights" />
+		<result column="ORDER_STATE" jdbcType="INTEGER" property="orderState" />
+		<result column="TOTAL_MONEY" jdbcType="BIGINT" property="totalMoney" />
+		<result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+		<result column="CHECKIN_DATE" jdbcType="DATE" property="checkinDate" />
+		<result column="CHECKOUT_DATE" jdbcType="DATE" property="checkoutDate" />
+		<result column="VIPTYPE" jdbcType="VARCHAR" property="vipType" />
+		<result column="QRCODEPATH" jdbcType="VARCHAR" property="qrCodePath" />
+		<result column="PRODUCT_TYPE" jdbcType="INTEGER" property="productType" />
+	</resultMap>
+	<select id="find" resultMap="BaseResultMap"
+		parameterType="com.sunshine.gardens.model.po.ReserveOrder">
+		select * from t_reserve_order
+		<where>
+			<if test="reserveId != null">
+				and RESERVE_ID = #{reserveId,jdbcType=VARCHAR}
+			</if>
+			<if test="productId != null and productId != 0">
+				and PRODUCT_ID = #{productId , jdbcType=INTEGER}
+			</if>
+			<if test="openid != null">
+				and OPENID = #{openid , jdbcType=VARCHAR}
+			</if>
+			<if test="submitterName != null">
+				and SUBMITTER_NAME = #{submitterName , jdbcType=VARCHAR}
+			</if>
+			<if test="submitterMobile != null">
+				and SUBMITTER_MOBILE = #{submitterMobile ,
+				jdbcType=VARCHAR}
+			</if>
+			<if test="vipId != null ">
+				and VIP_ID = #{vipId , jdbcType=VARCHAR}
+			</if>
+			<if test="totalMoney != null and totalMoney != 0">
+				and TOTAL_MONEY = #{totalMoney , jdbcType=BIGINT}
+			</if>
+			<if test="productType != null and productType != 0">
+				and PRODUCT_TYPE = #{productType , jdbcType=INTEGER}
+			</if>
+			<if test="orderState != null and orderState != 0">
+				and ORDER_STATE = #{orderState , jdbcType=INTEGER}
+			</if>
+			<if test="checkinDate != null">
+				and CHECKIN_DATE = #{checkinDate , jdbcType=DATE}
+			</if>
+		</where>
+		order by CREATE_TIME desc
+	</select>
+	<select id="findByPage" resultMap="BaseResultMap"
+		parameterType="com.sunshine.gardens.model.po.ReserveOrder">
+		select * from t_reserve_order
+		<where>
+			<if test="reserveId != null">
+				and RESERVE_ID = #{reserveId,jdbcType=VARCHAR}
+			</if>
+			<if test="productId != null and productId != 0">
+				and PRODUCT_ID = #{productId , jdbcType=INTEGER}
+			</if>
+			<if test="openid != null">
+				and OPENID = #{openid , jdbcType=VARCHAR}
+			</if>
+			<if test="submitterName != null">
+				and SUBMITTER_NAME = #{submitterName , jdbcType=VARCHAR}
+			</if>
+			<if test="submitterMobile != null">
+				and SUBMITTER_MOBILE = #{submitterMobile ,
+				jdbcType=VARCHAR}
+			</if>
+			<if test="vipId != null">
+				and VIP_ID = #{vipId , jdbcType=VARCHAR}
+			</if>
+			<if test="totalMoney != null and totalMoney != 0">
+				and TOTAL_MONEY = #{totalMoney , jdbcType=BIGINT}
+			</if>
+			<if test="productType != null and productType != 0">
+				and PRODUCT_TYPE = #{productType , jdbcType=INTEGER}
+			</if>
+			<if test="orderState != null and orderState != 0">
+				and ORDER_STATE = #{orderState , jdbcType=INTEGER}
+			</if>
+			<if test="checkinDate != null">
+				and CHECKIN_DATE = #{checkinDate , jdbcType=DATE}
+			</if>
+		</where>
+		order by CREATE_TIME desc
+	</select>
+	<select id="findByPageCount" resultType="java.lang.Long"
+		parameterType="com.sunshine.gardens.model.po.ReserveOrder">
+		select count(*) from t_reserve_order
+		<where>
+			<if test="reserveId != null">
+				and RESERVE_ID = #{reserveId,jdbcType=VARCHAR}
+			</if>
+			<if test="productId != null and productId != 0">
+				and PRODUCT_ID = #{productId , jdbcType=INTEGER}
+			</if>
+			<if test="openid != null">
+				and OPENID = #{openid , jdbcType=VARCHAR}
+			</if>
+			<if test="submitterName != null">
+				and SUBMITTER_NAME = #{submitterName , jdbcType=VARCHAR}
+			</if>
+			<if test="submitterMobile != null">
+				and SUBMITTER_MOBILE = #{submitterMobile ,
+				jdbcType=VARCHAR}
+			</if>
+			<if test="vipId != null">
+				and VIP_ID = #{vipId , jdbcType=VARCHAR}
+			</if>
+			<if test="totalMoney != null and totalMoney != 0">
+				and TOTAL_MONEY = #{totalMoney , jdbcType=BIGINT}
+			</if>
+			<if test="productType != null and productType != 0">
+				and PRODUCT_TYPE = #{productType , jdbcType=INTEGER}
+			</if>
+			<if test="orderState != null and orderState != 0">
+				and ORDER_STATE = #{orderState , jdbcType=INTEGER}
+			</if>
+			<if test="checkinDate != null">
+				and CHECKIN_DATE = #{checkinDate , jdbcType=DATE}
+			</if>
+		</where>
+		order by CREATE_TIME desc
+	</select>
+	<update id="update" parameterType="com.sunshine.gardens.model.po.ReserveOrder">
+		update t_reserve_order
+		<set>
+			<if test="orderState != null and orderState != 0">
+				ORDER_STATE = #{orderState,jdbcType=INTEGER},
+			</if>
+			<if test="specialNotes != null">
+				SPECIAL_NOTES = #{specialNotes,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where RESERVE_ID = #{reserveId,jdbcType=VARCHAR}
+	</update>
+	<insert id="insert" parameterType="com.sunshine.gardens.model.po.ReserveOrder">
+		insert into t_reserve_order
+		(RESERVE_ID,PRODUCT_ID, OPENID, SUBMITTER_NAME,SUBMITTER_MOBILE,
+		VIP_ID,
+		SPECIAL_NOTES,AMOUNTS,NIGHTS,ORDER_STATE,TOTAL_MONEY,CREATE_TIME,CHECKIN_DATE,CHECKOUT_DATE,VIPTYPE,QRCODEPATH,PRODUCT_TYPE)
+		values
+		(#{reserveId,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER},
+		#{openid,jdbcType=VARCHAR},#{submitterName,jdbcType=VARCHAR},
+		#{submitterMobile,jdbcType=VARCHAR}, #{vipId,jdbcType=VARCHAR},
+		#{specialNotes,jdbcType=VARCHAR},
+		#{amounts,jdbcType=INTEGER},#{nights,jdbcType=INTEGER},
+		#{orderState,jdbcType=INTEGER}, #{totalMoney,jdbcType=BIGINT},
+		#{createTime,jdbcType=TIMESTAMP},#{checkinDate,jdbcType=DATE},
+		#{checkoutDate,jdbcType=DATE},#{vipType,jdbcType=DATE},
+		#{qrCodePath,jdbcType=VARCHAR},#{productType,jdbcType=INTEGER})
+	</insert>
+	<delete id="clearInvalidOrders">
+		delete from t_reserve_order where ORDER_STATE=11 and
+		datediff(curdate(), CREATE_TIME)>=7
+	</delete>
+	<select id="hasQRCodeOrders" resultMap="BaseResultMap"
+		parameterType="com.sunshine.gardens.model.po.ReserveOrder">
+		select * from t_reserve_order where qrCodePath != '' or qrCodePath != null
+	</select>
+</mapper>

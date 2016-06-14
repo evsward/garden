@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunshine.gardens.model.po.ActivityOrder">
+	<resultMap id="BaseResultMap" type="com.sunshine.gardens.model.po.ActivityOrder">
+		<id column="ACTIVITY_ORDER_ID" jdbcType="BIGINT" property="activityOrderId" />
+		<result column="OPENID" jdbcType="VARCHAR" property="openid" />
+		<result column="ACTIVITY_ID" jdbcType="INTEGER" property="activityId" />
+		<result column="SUBMITTER_NAME1" jdbcType="VARCHAR" property="submitterName1" />
+		<result column="SUBMITTER_NAME2" jdbcType="VARCHAR" property="submitterName2" />
+		<result column="SUBMITTER_MOBILE" jdbcType="VARCHAR" property="submitterMobile" />
+		<result column="SUBMITTER_DATE1" jdbcType="VARCHAR" property="submitterDate1" />
+		<result column="SUBMITTER_AGE1" jdbcType="INTEGER" property="submitterAge1" />
+		<result column="SUBMITTER_AGE2" jdbcType="INTEGER" property="submitterAge2" />
+		<result column="SPECIAL_NOTES" jdbcType="VARCHAR" property="specialNotes" />
+	</resultMap>
+	<select id="find" resultMap="BaseResultMap"
+		parameterType="com.sunshine.gardens.model.po.ActivityOrder">
+		select * from t_activity_order
+		<where>
+			<if test="openid != null ">
+				and OPENID = #{openid,jdbcType=VARCHAR}
+			</if>
+			<if test="submitterName1 != null">
+				and SUBMITTER_NAME1 = #{submitterName1 ,
+				jdbcType=VARCHAR}
+			</if>
+			<if test="submitterMobile != null">
+				and SUBMITTER_MOBILE = #{submitterMobile ,
+				jdbcType=VARCHAR}
+			</if>
+			<if test="activityId != null and activityId != 0">
+				and ACTIVITY_ID = #{activityId , jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+	<select id="findByPage" resultMap="BaseResultMap"
+		parameterType="com.sunshine.gardens.model.po.ActivityOrder">
+		select * from t_activity_order
+		<where>
+			<if test="openid != null ">
+				and OPENID = #{openid,jdbcType=VARCHAR}
+			</if>
+			<if test="submitterName1 != null">
+				and SUBMITTER_NAME1 = #{submitterName1 ,
+				jdbcType=VARCHAR}
+			</if>
+			<if test="submitterMobile != null">
+				and SUBMITTER_MOBILE = #{submitterMobile ,
+				jdbcType=VARCHAR}
+			</if>
+			<if test="activityId != null and activityId != 0">
+				and ACTIVITY_ID = #{activityId , jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+	<select id="findByPageCount" resultType="java.lang.Long"
+		parameterType="com.sunshine.gardens.model.po.ActivityOrder">
+		select count(*) from t_activity_order
+		<where>
+			<if test="openid != null ">
+				and OPENID = #{openid,jdbcType=VARCHAR}
+			</if>
+			<if test="submitterName1 != null">
+				and SUBMITTER_NAME1 = #{submitterName1 ,
+				jdbcType=VARCHAR}
+			</if>
+			<if test="submitterMobile != null">
+				and SUBMITTER_MOBILE = #{submitterMobile ,
+				jdbcType=VARCHAR}
+			</if>
+			<if test="activityId != null and activityId != 0">
+				and ACTIVITY_ID = #{activityId , jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+	<insert id="insert" parameterType="com.sunshine.gardens.model.po.ActivityOrder">
+		insert into t_activity_order
+		(OPENID, ACTIVITY_ID,
+		SUBMITTER_NAME1, SUBMITTER_NAME2,
+		SUBMITTER_MOBILE,
+		SUBMITTER_DATE1,
+		SPECIAL_NOTES,SUBMITTER_AGE1,SUBMITTER_AGE2)
+		values
+		(#{openid,jdbcType=VARCHAR},
+		#{activityId,jdbcType=INTEGER},
+		#{submitterName1,jdbcType=VARCHAR},
+		#{submitterName2,jdbcType=VARCHAR},
+		#{submitterMobile,jdbcType=VARCHAR},
+		#{submitterDate1,jdbcType=VARCHAR},
+		#{specialNotes,jdbcType=VARCHAR},
+		#{submitterAge1,jdbcType=INTEGER},
+		#{submitterAge2,jdbcType=INTEGER})
+	</insert>
+</mapper>

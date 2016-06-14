@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF8
+encoding//src/main/java/com/sunshine/gardens/utils/webservice/IMemberService.java=UTF-8
+encoding//src/main/java/com/sunshine/gardens/utils/webservice/IReservationService.java=UTF-8
+encoding//src/main/java/com/sunshine/gardens/utils/webservice/MemberService.java=UTF-8
+encoding//src/main/java/com/sunshine/gardens/utils/webservice/MemberServiceHttpEndpointStub.java=UTF-8
+encoding//src/main/java/com/sunshine/gardens/utils/webservice/MemberServiceLocator.java=UTF-8
+encoding//src/main/java/com/sunshine/gardens/utils/webservice/ReservationService.java=UTF-8
+encoding//src/main/java/com/sunshine/gardens/utils/webservice/ReservationServiceHttpEndpointStub.java=UTF-8
+encoding//src/main/java/com/sunshine/gardens/utils/webservice/ReservationServiceLocator.java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/main/resources/application.properties=UTF-8
+encoding//src/test/java=UTF8
+encoding//src/test/resources=UTF-8
+encoding/<project>=UTF-8

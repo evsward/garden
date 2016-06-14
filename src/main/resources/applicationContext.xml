@@ -1,0 +1,118 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop   
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd   
+        http://www.springframework.org/schema/beans   
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+        http://www.springframework.org/schema/context   
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd   
+        http://www.springframework.org/schema/mvc   
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd   
+        http://www.springframework.org/schema/tx   
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+	<description>Spring公共配置文件 </description>
+	<!-- 定义受环境影响易变的变量 -->
+	<bean id="propertyPlaceholder"
+		class="com.sunshine.gardens.utils.MyPropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<!-- 标准配置 -->
+				<value>classpath*:/application.properties</value>
+				<!-- 集群中节点配置 -->
+				<!-- <value>classpath*:/application.cluster.properties</value> -->
+				<!-- 本地开发环境配置 -->
+				<!-- <value>classpath*:/application.local.properties</value> -->
+				<!-- 服务器生产环境配置 -->
+				<!-- <value>file:/var/myapp/application.server.properties</value> -->
+			</list>
+		</property>
+	</bean>
+	<!-- SpringContextUtils定义 -->
+	<bean id="springContextHolder" class="com.dance.core.utils.spring.SpringContextHolder"
+		lazy-init="false" />
+	<!-- ============================== 数据库配置 ==================================== -->
+	<!-- 配置DataSource数据源 -->
+	<!-- ============================== 数据库配置 ==================================== -->
+	<!-- 配置数据服务平台数据源 -->
+	<bean id="garden_data_source" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<!-- Connection Info -->
+		<property name="driverClassName" value="${garden.jdbc.driver}" />
+		<property name="url" value="${garden.jdbc.url}" />
+		<property name="username" value="${garden.jdbc.username}" />
+		<property name="password" value="${garden.jdbc.password}" />
+		<property name="minEvictableIdleTimeMillis" value="1800000" />
+		<property name="numTestsPerEvictionRun" value="3" />
+		<property name="testOnBorrow" value="true" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnReturn" value="true" />
+		<property name="validationQuery" value="SELECT 1" />
+	</bean>
+	<bean id="dataSource" class="com.dance.core.orm.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry value-ref="garden_data_source" key="garden_data_source" />
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="garden_data_source"></property>
+	</bean>
+
+	<!-- StatementHandler的Interceptor -->
+	<bean id="diclectStatementHandlerInterceptor"
+		class="com.dance.core.orm.mybatis.DiclectStatementHandlerInterceptor"
+		init-method="init">
+		<!-- 是否支持多数据源,如果支持多数据源，supportMultiDS属性值为true，DIALECT属性不需要设置 -->
+		<property name="supportMultiDS" value="true" />
+		<property name="DIALECT"
+			value="com.dance.core.orm.mybatis.dialect.impl.MySQLDialect" />
+		<!--<property name="DIALECT" value="com.dance.core.orm.mybatis.dialect.impl.OracleDialect" 
+			/> -->
+
+	</bean>
+
+	<!-- 使用SqlSessionFactoryBean工厂产生SqlSession对象，方便后期注入Dao -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 指定sqlMapConfig总配置文件，订制的environment在spring容器中不在生效 -->
+		<property name="configLocation" value="classpath:mybatis.xml" />
+		<!-- <property name="transactionFactoryClass" value="org.mybatis.spring.transaction.SpringManagedTransactionFactory" 
+			/> <property name="transactionFactoryClass" value="org.apache.ibatis.transaction.managed.ManagedTransactionFactory" 
+			/> -->
+		<!--指定实体类映射文件，可以指定同时指定某一包以及子包下面的所有配置文件，mapperLocations和configLocation有一个即可， 
+			当需要为实体类指定别名时，可指定configLocation属性，再在mybatis总配置文件中采用mapper引入实体类映射文件 -->
+		<property name="mapperLocations" value="classpath*:mapper/*.xml" />
+	</bean>
+
+	<!-- 注解探测器 ， 在JUnit测试的时候需要 -->
+	<context:component-scan base-package="com.sunshine.gardens" />
+
+	<!-- ================================= 事务控制相关 ============================================= -->
+	<bean name="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="delete*" propagation="REQUIRED" read-only="false"
+				rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException" />
+			<tx:method name="insert*" propagation="REQUIRED" read-only="false"
+				rollback-for="java.lang.RuntimeException" />
+			<tx:method name="update*" propagation="REQUIRED" read-only="false"
+				rollback-for="java.lang.Exception" />
+
+			<tx:method name="find*" propagation="SUPPORTS" />
+			<tx:method name="get*" propagation="SUPPORTS" />
+			<tx:method name="select*" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="pc" expression="execution(* *.*.*(..))" />
+		<aop:advisor pointcut-ref="pc" advice-ref="txAdvice"></aop:advisor>
+	</aop:config>
+</beans>

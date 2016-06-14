@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunshine.gardens.model.po.Product">
+	<resultMap id="BaseResultMap" type="com.sunshine.gardens.model.po.Product">
+		<id column="PRODUCT_ID" jdbcType="INTEGER" property="productId" />
+		<result column="PRODUCT_NAME" jdbcType="VARCHAR" property="productName" />
+		<result column="PRODUCT_TYPE" jdbcType="INTEGER" property="productType" />
+		<result column="COLUMN_ID" jdbcType="BIGINT" property="columnId" />
+		<result column="TYPE_CODE" jdbcType="VARCHAR" property="typeCode" />
+		<result column="CODE_DESCRIPTION" jdbcType="VARCHAR" property="codeDescription" />
+		<result column="UNIT_PRICE" jdbcType="BIGINT" property="unitPrice" />
+		<result column="WORKDAY_PRICE" jdbcType="BIGINT" property="workdayPrice" />
+		<result column="INFINITE_PRICE" jdbcType="BIGINT" property="infinitePrice" />
+		<result column="HOLIDAY_PRICE" jdbcType="BIGINT" property="holidayPrice" />
+		<result column="GOLD_PRICE" jdbcType="BIGINT" property="goldPrice" />
+		<result column="SILVER_PRICE" jdbcType="BIGINT" property="silverPrice" />
+		<result column="PRODUCT_STATE" jdbcType="INTEGER" property="productState" />
+		<result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
+		<result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+		<result column="VALID_FROM" jdbcType="DATE" property="validFrom" />
+		<result column="VALID_TO" jdbcType="DATE" property="validTo" />
+		<result column="VALID_DAY" jdbcType="VARCHAR" property="validDay" />
+		<result column="INVENTORY" jdbcType="INTEGER" property="inventory" />
+		<result column="DURATION" jdbcType="BIGINT" property="duration" />
+		<result column="NOTES" jdbcType="VARCHAR" property="notes" />
+		<result column="ICONSRC" jdbcType="VARCHAR" property="iconsrc" />
+	</resultMap>
+	<select id="find" resultMap="BaseResultMap"
+		parameterType="com.sunshine.gardens.model.po.Product">
+		select * from t_product
+		<where>
+			<if test="productId != null and productId != 0">
+				and PRODUCT_ID = #{productId,jdbcType=INTEGER}
+			</if>
+			<if test="productName != null">
+				and PRODUCT_NAME = #{productName , jdbcType=VARCHAR}
+			</if>
+			<if test="productType != null and productType != 0">
+				and PRODUCT_TYPE = #{productType , jdbcType=INTEGER}
+			</if>
+			<if test="columnId != null and columnId != 0">
+				and COLUMN_ID = #{columnId , jdbcType=BIGINT}
+			</if>
+			<if test="typeCode != null">
+				and TYPE_CODE = #{typeCode , jdbcType=VARCHAR}
+			</if>
+			<if test="codeDescription != null">
+				and CODE_DESCRIPTION = #{codeDescription ,
+				jdbcType=VARCHAR}
+			</if>
+			<if test="unitPrice != null and unitPrice != 0">
+				and UNIT_PRICE = #{unitPrice , jdbcType=BIGINT}
+			</if>
+			<if test="productState != null and productState != 0">
+				and PRODUCT_STATE = #{productState , jdbcType=INTEGER}
+			</if>
+			<if test="notes != null">
+				and NOTES = #{notes,JDBCTYPE=VARCHAR}
+			</if>
+			<if test="validDay != null">
+				and VALID_DAY = #{validDay , jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by column_id
+	</select>
+	<select id="findByPage" resultMap="BaseResultMap"
+		parameterType="com.sunshine.gardens.model.po.Product">
+		select * from t_product
+		<where>
+			<if test="productId != null and productId != 0">
+				and PRODUCT_ID = #{productId,jdbcType=INTEGER}
+			</if>
+			<if test="productName != null">
+				and PRODUCT_NAME = #{productName , jdbcType=VARCHAR}
+			</if>
+			<if test="productType != null and productType != 0">
+				and PRODUCT_TYPE = #{productType , jdbcType=INTEGER}
+			</if>
+			<if test="columnId != null and columnId != 0">
+				and COLUMN_ID = #{columnId , jdbcType=BIGINT}
+			</if>
+			<if test="typeCode != null">
+				and TYPE_CODE = #{typeCode , jdbcType=VARCHAR}
+			</if>
+			<if test="codeDescription != null">
+				and CODE_DESCRIPTION = #{codeDescription ,
+				jdbcType=VARCHAR}
+			</if>
+			<if test="unitPrice != null and unitPrice != 0">
+				and UNIT_PRICE = #{unitPrice , jdbcType=BIGINT}
+			</if>
+			<if test="productState != null and productState != 0">
+				and PRODUCT_STATE = #{productState , jdbcType=INTEGER}
+			</if>
+			<if test="notes != null">
+				and NOTES = #{notes,JDBCTYPE=VARCHAR}
+			</if>
+			<if test="validDay != null">
+				and VALID_DAY = #{validDay , jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by column_id
+	</select>
+	<select id="findByPageCount" resultType="java.lang.Long"
+		parameterType="com.sunshine.gardens.model.po.Product">
+		select count(*) from t_product
+		<where>
+			<if test="productId != null and productId != 0">
+				and PRODUCT_ID = #{productId,jdbcType=INTEGER}
+			</if>
+			<if test="productName != null">
+				and PRODUCT_NAME = #{productName , jdbcType=VARCHAR}
+			</if>
+			<if test="productType != null and productType != 0">
+				and PRODUCT_TYPE = #{productType , jdbcType=INTEGER}
+			</if>
+			<if test="columnId != null and columnId != 0">
+				and COLUMN_ID = #{columnId , jdbcType=BIGINT}
+			</if>
+			<if test="typeCode != null">
+				and TYPE_CODE = #{typeCode , jdbcType=VARCHAR}
+			</if>
+			<if test="codeDescription != null">
+				and CODE_DESCRIPTION = #{codeDescription ,
+				jdbcType=VARCHAR}
+			</if>
+			<if test="unitPrice != null and unitPrice != 0">
+				and UNIT_PRICE = #{unitPrice , jdbcType=BIGINT}
+			</if>
+			<if test="productState != null and productState != 0">
+				and PRODUCT_STATE = #{productState , jdbcType=INTEGER}
+			</if>
+			<if test="notes != null">
+				and NOTES = #{notes,JDBCTYPE=VARCHAR}
+			</if>
+			<if test="validDay != null">
+				and VALID_DAY = #{validDay , jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by column_id
+	</select>
+	<update id="update" parameterType="com.sunshine.gardens.model.po.Product">
+		update t_product
+		<set>
+			<if test="unitPrice != null">
+				UNIT_PRICE = #{unitPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="workdayPrice != null">
+				WORKDAY_PRICE = #{workdayPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="infinitePrice != null">
+				INFINITE_PRICE = #{infinitePrice,jdbcType=VARCHAR},
+			</if>
+			<if test="holidayPrice != null">
+				HOLIDAY_PRICE = #{holidayPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="goldPrice != null">
+				GOLD_PRICE = #{goldPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="silverPrice != null">
+				SILVER_PRICE = #{silverPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="validDay != null">
+				VALID_DAY = #{validDay,jdbcType=VARCHAR},
+			</if>
+			<if test="notes != null">
+				NOTES = #{notes,JDBCTYPE=VARCHAR},
+			</if>
+			<if test="inventory != null and inventory != 0">
+				INVENTORY = #{inventory,jdbcType=INTEGER},
+			</if>
+			<if test="codeDescription != null">
+				CODE_DESCRIPTION = #{codeDescription,JDBCTYPE=VARCHAR},
+			</if>
+			<if test="productState != null">
+				PRODUCT_STATE = #{productState,JDBCTYPE=VARCHAR},
+			</if>
+			<if test="typeCode != null">
+				TYPE_CODE = #{typeCode,JDBCTYPE=VARCHAR},
+			</if>
+			<if test="productName != null">
+				PRODUCT_NAME = #{productName,JDBCTYPE=VARCHAR},
+			</if>
+			<if test="iconsrc != null">
+				ICONSRC = #{iconsrc,JDBCTYPE=VARCHAR},
+			</if>
+		</set>
+		where PRODUCT_ID = #{productId,jdbcType=INTEGER}
+	</update>
+	<insert id="insert" parameterType="com.sunshine.gardens.model.po.Product">
+		insert into t_product (
+		PRODUCT_NAME, PRODUCT_TYPE,
+		COLUMN_ID, TYPE_CODE,
+		CODE_DESCRIPTION,
+		UNIT_PRICE,WORKDAY_PRICE,INFINITE_PRICE,
+		HOLIDAY_PRICE,GOLD_PRICE,SILVER_PRICE,
+		PRODUCT_STATE, CREATE_TIME,
+		VALID_DAY, INVENTORY,ICONSRC, NOTES)
+		values (
+		#{productName,jdbcType=VARCHAR},
+		#{productType,jdbcType=INTEGER},
+		#{columnId,jdbcType=BIGINT},
+		#{typeCode,jdbcType=VARCHAR},
+		#{codeDescription,jdbcType=VARCHAR},
+		#{unitPrice,jdbcType=BIGINT},#{workdayPrice,jdbcType=BIGINT},
+		#{infinitePrice,jdbcType=BIGINT},#{holidayPrice,jdbcType=BIGINT},
+		#{goldPrice,jdbcType=BIGINT},#{silverPrice,jdbcType=BIGINT},
+		#{productState,jdbcType=INTEGER},
+		#{createTime,jdbcType=DATE},
+		#{validDay,jdbcType=VARCHAR},
+		#{inventory,jdbcType=INTEGER},
+		#{iconsrc,jdbcType=VARCHAR},
+		#{notes,jdbcType=VARCHAR})
+	</insert>
+</mapper>

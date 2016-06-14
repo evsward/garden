@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunshine.gardens.model.po.Menu">
+	<resultMap id="BaseResultMap" type="com.sunshine.gardens.model.po.Menu">
+		<id column="MENU_ID" jdbcType="INTEGER" property="menuId" />
+		<result column="PARENT_MENU_ID" jdbcType="INTEGER" property="parentMenuId" />
+		<result column="MENU_LEVEL" jdbcType="INTEGER" property="menuLevel" />
+		<result column="MENU_TYPE" jdbcType="INTEGER" property="menuType" />
+		<result column="MENU_NAME" jdbcType="VARCHAR" property="menuName" />
+		<result column="PARAM_VALUE" jdbcType="VARCHAR" property="paramValue" />
+		<result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
+		<result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+		<result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+		<result column="MENU_STATE" jdbcType="INTEGER" property="menuState" />
+	</resultMap>
+	<select id="find" resultMap="BaseResultMap" parameterType="com.sunshine.gardens.model.po.Menu">
+		select * from t_menu
+		<where>
+			<if test="parentMenuId != null and parentMenuId != 0">
+				and PARENT_MENU_ID = #{parentMenuId,jdbcType=INTEGER}
+			</if>
+			<if test="menuLevel != null and menuLevel != 0">
+				and MENU_LEVEL = #{menuLevel , jdbcType=INTEGER}
+			</if>
+			<if test="menuType != null and menuType != 0">
+				and MENU_TYPE = #{menuType , jdbcType=INTEGER}
+			</if>
+			<if test="menuName != null">
+				and MENU_NAME = #{menuName , jdbcType=VARCHAR}
+			</if>
+			<if test="paramValue != null">
+				and PARAM_VALUE = #{paramValue , jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null">
+				and USER_ID = #{userId , jdbcType=VARCHAR}
+			</if>
+			<if test="menuState != null and menuState != 0">
+				and MENU_STATE = #{menuState , jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+	<select id="findByPage" resultMap="BaseResultMap" parameterType="com.sunshine.gardens.model.po.Menu">
+		select * from t_menu
+		<where>
+			<if test="parentMenuId != null and parentMenuId != 0">
+				and PARENT_MENU_ID = #{parentMenuId,jdbcType=INTEGER}
+			</if>
+			<if test="menuLevel != null and menuLevel != 0">
+				and MENU_LEVEL = #{menuLevel , jdbcType=INTEGER}
+			</if>
+			<if test="menuType != null and menuType != 0">
+				and MENU_TYPE = #{menuType , jdbcType=INTEGER}
+			</if>
+			<if test="menuName != null">
+				and MENU_NAME = #{menuName , jdbcType=VARCHAR}
+			</if>
+			<if test="paramValue != null">
+				and PARAM_VALUE = #{paramValue , jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null">
+				and USER_ID = #{userId , jdbcType=VARCHAR}
+			</if>
+			<if test="menuState != null and menuState != 0">
+				and MENU_STATE = #{menuState , jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+	<select id="findByPageCount"  resultType="java.lang.Long" parameterType="com.sunshine.gardens.model.po.Menu">
+		select count(*) from t_menu
+		<where>
+			<if test="parentMenuId != null and parentMenuId != 0">
+				and PARENT_MENU_ID = #{parentMenuId,jdbcType=INTEGER}
+			</if>
+			<if test="menuLevel != null and menuLevel != 0">
+				and MENU_LEVEL = #{menuLevel , jdbcType=INTEGER}
+			</if>
+			<if test="menuType != null and menuType != 0">
+				and MENU_TYPE = #{menuType , jdbcType=INTEGER}
+			</if>
+			<if test="menuName != null">
+				and MENU_NAME = #{menuName , jdbcType=VARCHAR}
+			</if>
+			<if test="paramValue != null">
+				and PARAM_VALUE = #{paramValue , jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null">
+				and USER_ID = #{userId , jdbcType=VARCHAR}
+			</if>
+			<if test="menuState != null and menuState != 0">
+				and MENU_STATE = #{menuState , jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+	<update id="update" parameterType="com.sunshine.gardens.model.po.Menu">
+		update t_menu
+		<set>
+			<if test="menuName != null">
+				MENU_NAME = #{menuName,jdbcType=VARCHAR},
+			</if>
+			<if test="paramValue != null">
+				PARAM_VALUE = #{paramValue,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="menuState != null and menuState != 0">
+				MENU_STATE = #{menuState,jdbcType=INTEGER},
+			</if>
+		</set>
+		where MENU_ID = #{menuId,jdbcType=INTEGER}
+	</update>
+	<insert id="insert" parameterType="com.sunshine.gardens.model.po.Menu">
+		insert into t_menu
+		(PARENT_MENU_ID, MENU_LEVEL,
+		MENU_TYPE, MENU_NAME, PARAM_VALUE,
+		CREATE_TIME, USER_ID,
+		MENU_STATE)
+		values
+		(#{parentMenuId,jdbcType=INTEGER},
+		#{menuLevel,jdbcType=INTEGER},
+		#{menuType,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR},
+		#{paramValue,jdbcType=VARCHAR},
+		#{createTime,jdbcType=DATE},
+		#{userId,jdbcType=VARCHAR},
+		#{menuState,jdbcType=INTEGER})
+	</insert>
+	<delete id="delete" parameterType="com.sunshine.gardens.model.po.Menu">
+		delete from t_menu
+		<where>
+			<if test="parentMenuId != null and parentMenuId != 0">
+				and PARENT_MENU_ID = #{parentMenuId,jdbcType=INTEGER}
+			</if>
+			<if test="menuId != null and menuId != 0">
+				and MENU_ID = #{menuId,jdbcType=INTEGER}
+			</if>
+			<if test="menuType != null and menuType != 0">
+				and MENU_TYPE = #{menuType , jdbcType=INTEGER}
+			</if>
+			<if test="menuState != null and menuState != 0">
+				and MENU_STATE = #{menuState , jdbcType=INTEGER}
+			</if>
+			<if test="menuLevel != null and menuLevel != 0">
+				and MENU_LEVEL = #{menuLevel , jdbcType=INTEGER}
+			</if>
+		</where>
+	</delete>
+</mapper>

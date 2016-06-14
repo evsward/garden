@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunshine.gardens.model.po.SysUserRole">
+	<resultMap id="BaseResultMap" type="com.sunshine.gardens.model.po.SysUserRole">
+		<id column="RELA_ID" jdbcType="INTEGER" property="relaId" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="ROLE_CODE" jdbcType="VARCHAR" property="roleCode" />
+	</resultMap>
+	<select id="find" resultMap="BaseResultMap"
+		parameterType="com.sunshine.gardens.model.po.SysUserRole">
+		select * from t_sys_user_role
+		<where>
+			<if test="relaId != null and relaId != 0">
+				and RELA_ID = #{relaId,jdbcType=INTEGER}
+			</if>
+			<if test="userId != null and userId != 0">
+				and USER_ID = #{userId , jdbcType=INTEGER}
+			</if>
+			<if test="roleCode != null ">
+				and ROLE_CODE = #{roleCode , jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	<select id="checkUserRoleByID" resultType="java.lang.Integer"
+		parameterType="com.sunshine.gardens.model.po.SysUserRole">
+		select count(*) from t_sys_user_role where
+		user_id=#{userId,jdbcType=INTEGER} and
+		role_code=#{roleCode,jdbcType=VARCHAR}
+	</select>
+	<insert id="insert" parameterType="com.sunshine.gardens.model.po.SysUserRole">
+		insert into t_sys_user_role
+		(USER_ID, ROLE_CODE) values
+		(#{userId,jdbcType=INTEGER},
+		#{roleCode,jdbcType=VARCHAR})
+	</insert>
+	<delete id="deleteRolesByUserId" parameterType="java.lang.Integer">
+		delete from
+		t_sys_user_role
+		where user_id = #{userId,jdbcType=INTEGER}
+	</delete>
+	<delete id="delete" parameterType="com.sunshine.gardens.model.po.SysUserRole">
+		delete from t_sys_user_role
+		<where>
+			<if test="relaId != null and relaId != 0">
+				and RELA_ID = #{relaId,jdbcType=INTEGER}
+			</if>
+			<if test="userId != null and userId != 0">
+				and USER_ID = #{userId , jdbcType=INTEGER}
+			</if>
+			<if test="roleCode != null and roleCode != 0">
+				and ROLE_CODE = #{roleCode , jdbcType=INTEGER}
+			</if>
+		</where>
+	</delete>
+</mapper>

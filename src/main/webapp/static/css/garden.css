@@ -1,0 +1,28 @@
+#logindev {
+	transform: translateY(50%);
+	background-color: #ccc;
+}
+
+body {
+	padding-top: 10px;
+	padding-bottom: 40px;
+}
+
+.myButton {
+	font-weight:bold;
+	font-family:微软雅黑;
+	font-size:20px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+}
+
+.tabName {
+	font-weight:bold;
+	font-family:微软雅黑;
+	font-size:18px;
+}
+
+.myTree {
+	font-size: 20px;
+}
